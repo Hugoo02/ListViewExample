@@ -69,19 +69,19 @@ class MainActivity : AppCompatActivity() {
 
             view.setOnClickListener {
 
-                view.setOnClickListener {
+                val intent = Intent(this@MainActivity, EditGame::class.java)
 
-                    val intent = Intent(this@MainActivity, EditGame::class.java)
+                intent.putExtra("title", games[position].title)
+                intent.putExtra("gender", games[position].gender)
+                intent.putExtra("position", position)
 
-                    intent.putExtra("title", games[position].title)
-                    intent.putExtra("gender", games[position].gender)
-                    intent.putExtra("position", position)
+                startActivity(intent)
 
-                    startActivity(intent)
-
-                }
+                notifyDataSetChanged()
 
             }
+
+
 
             return view
 
