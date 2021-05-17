@@ -16,6 +16,8 @@ class AddGameActivity : AppCompatActivity() {
         val editTextName = findViewById<EditText>(R.id.editTextName)
         val editTextGender = findViewById<EditText>(R.id.editTextGender)
 
+        //val bundle
+
         buttonAdd.setOnClickListener {
 
             games.add(Game(editTextName.text.toString(), editTextGender.text.toString()))

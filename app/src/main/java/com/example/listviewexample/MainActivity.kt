@@ -67,6 +67,21 @@ class MainActivity : AppCompatActivity() {
             textViewName.text = games[position].title
             textViewGender.text = games[position].gender
 
+            view.setOnClickListener {
+
+                view.setOnClickListener {
+
+                    val intent = Intent(this@MainActivity, EditGame::class.java)
+
+                    intent.putExtra("title", games[position].title)
+                    intent.putExtra("gender", games[position].gender)
+
+                    startActivity(intent)
+
+                }
+
+            }
+
             return view
 
         }
