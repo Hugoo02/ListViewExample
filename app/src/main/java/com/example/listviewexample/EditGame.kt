@@ -28,8 +28,8 @@ class EditGame : AppCompatActivity() {
 
         buttonEdit.setOnClickListener {
 
-            games[position].title = editTextTitle.hint.toString()
-            games[position].gender =  editTextGender.hint.toString()
+            games[position].title = editTextTitle.text.toString()
+            games[position].gender =  editTextGender.text.toString()
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
