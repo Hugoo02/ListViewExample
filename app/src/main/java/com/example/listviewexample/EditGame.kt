@@ -1,5 +1,6 @@
 package com.example.listviewexample
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -14,12 +15,24 @@ class EditGame : AppCompatActivity() {
         var editTextTitle = findViewById<EditText>(R.id.editTextTitle)
         var editTextGender = findViewById<EditText>(R.id.editTextGender)
         val buttonEdit = findViewById<Button>(R.id.buttonEdit)
+        var position = 0
 
         val bundle = intent.extras
 
         bundle?.let {
             editTextTitle.hint = it.getString("title")
             editTextGender.hint = it.getString("gender")
+            position = it.getInt("position")
+        }
+
+        buttonEdit.setOnClickListener {
+
+            games[position].title = editTextTitle.hint.toString()
+            games[position].gender =  editTextGender.hint.toString()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
         }
 
 

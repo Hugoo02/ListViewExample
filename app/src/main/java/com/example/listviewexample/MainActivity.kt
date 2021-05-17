@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
                     intent.putExtra("title", games[position].title)
                     intent.putExtra("gender", games[position].gender)
+                    intent.putExtra("position", position)
 
                     startActivity(intent)
 
