@@ -1,13 +1,18 @@
 package com.example.listviewexample
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import org.json.JSONObject
 
 class AddGameActivity : AppCompatActivity() {
+
+    lateinit var game : Game
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_game)
@@ -16,13 +21,15 @@ class AddGameActivity : AppCompatActivity() {
         val editTextName = findViewById<EditText>(R.id.editTextName)
         val editTextGender = findViewById<EditText>(R.id.editTextGender)
 
-        //val bundle
-
         buttonAdd.setOnClickListener {
 
-            games.add(Game(editTextName.text.toString(), editTextGender.text.toString()))
+            game = Game(editTextName.text.toString(), editTextGender.text.toString())
             Toast.makeText(this, "Jogo adicionado com sucesso!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
+
+            val intent = Intent()
+            intent.putExtra("gameObject", game.toJson().toString())
+            setResult(Activity.RESULT_OK, intent)
+            finish()
 
         }
     }

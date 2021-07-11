@@ -8,16 +8,17 @@ import android.widget.Adapter
 import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
-
-var games : MutableList<Game> = arrayListOf(Game("Minecraft", "Criatividade"))
+import org.json.JSONObject
+import kotlin.time.milliseconds
 
 class MainActivity : AppCompatActivity() {
+
+    var games : MutableList<Game> = arrayListOf(Game("teste", "teste"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val adapterGames : GameAdapter()
         val listViewGames = findViewById<ListView>(R.id.listViewGames)
 
         listViewGames.adapter = GameAdapter()
@@ -35,7 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId){
             R.id.itemAdd -> {
-                startActivity(Intent(this, AddGameActivity::class.java))
+                val intent = Intent(this, AddGameActivity::class.java)
+                startActivityForResult(intent, 2000)
+
                 return true
             }
         }
@@ -70,18 +73,13 @@ class MainActivity : AppCompatActivity() {
             view.setOnClickListener {
 
                 val intent = Intent(this@MainActivity, EditGame::class.java)
-
-                intent.putExtra("title", games[position].title)
-                intent.putExtra("gender", games[position].gender)
+                intent.putExtra("gameObject", games[position].toJson().toString())
                 intent.putExtra("position", position)
-
-                startActivity(intent)
+                startActivityForResult(intent, 1000)
 
                 notifyDataSetChanged()
 
             }
-
-
 
             return view
 
@@ -89,5 +87,52 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1000) {
+            if (resultCode == RESULT_OK){
+
+                var position : Int? = null
+                var gameStr: String? = null
+                var game : Game? = null
+
+                data?.extras.let{
+
+                    position = it?.getInt("position")
+                    gameStr = it?.getString("gameObject")
+
+                }
+
+                game = Game.fromJson(JSONObject(gameStr))
+
+                games[position!!] = game
+
+            }
+        }
+
+        else if (requestCode == 2000) {
+            if (resultCode == RESULT_OK){
+
+                var gameStr: String? = null
+                var game : Game? = null
+
+                data?.extras.let{
+
+                    gameStr = it?.getString("gameObject")
+
+                }
+
+                game = Game.fromJson(JSONObject(gameStr))
+
+                games.add(game)
+                GameAdapter().notifyDataSetChanged() //não está a funcionar
+
+
+            }
+        }
+
+    }
+
 }
+
 
