@@ -13,7 +13,8 @@ import kotlin.time.milliseconds
 
 class MainActivity : AppCompatActivity() {
 
-    var games : MutableList<Game> = arrayListOf(Game("teste", "teste"))
+    var games : MutableList<Game> = arrayListOf()
+    val gameAdapter = GameAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val listViewGames = findViewById<ListView>(R.id.listViewGames)
 
-        listViewGames.adapter = GameAdapter()
+        listViewGames.adapter = gameAdapter
 
     }
 
@@ -106,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 game = Game.fromJson(JSONObject(gameStr))
 
                 games[position!!] = game
+                gameAdapter.notifyDataSetChanged()
 
             }
         }
@@ -125,9 +127,7 @@ class MainActivity : AppCompatActivity() {
                 game = Game.fromJson(JSONObject(gameStr))
 
                 games.add(game)
-                GameAdapter().notifyDataSetChanged() //não está a funcionar
-
-
+                gameAdapter.notifyDataSetChanged()
             }
         }
 
