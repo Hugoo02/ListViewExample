@@ -38,7 +38,7 @@ class EditGame : AppCompatActivity() {
             game!!.gender =  editTextGender.text.toString()
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("gameObject", Game(editTextTitle.text.toString(), editTextGender.text.toString()).toJson().toString())
+            intent.putExtra("gameObject", Game(editTextTitle.text.toString(), editTextGender.text.toString(), game!!.date).toJson().toString())
             intent.putExtra("position", position)
             setResult(Activity.RESULT_OK, intent)
             finish()

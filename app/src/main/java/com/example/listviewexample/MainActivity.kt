@@ -65,11 +65,13 @@ class MainActivity : AppCompatActivity() {
 
             var view = layoutInflater.inflate(R.layout.row_game, parent, false)
 
-            var textViewName = view.findViewById<TextView>(R.id.textViewName)
-            var textViewGender = view.findViewById<TextView>(R.id.textViewGender)
+            val textViewName = view.findViewById<TextView>(R.id.textViewName)
+            val textViewGender = view.findViewById<TextView>(R.id.textViewGender)
+            val textViewDate = view.findViewById<TextView>(R.id.textViewDate)
 
             textViewName.text = games[position].title
             textViewGender.text = games[position].gender
+            textViewDate.text = games[position].date
 
             view.setOnClickListener {
 

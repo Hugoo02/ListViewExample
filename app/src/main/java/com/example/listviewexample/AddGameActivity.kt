@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.listviewexample.Utils.UtilFunctions
 import org.json.JSONObject
+import java.time.LocalDateTime
 
 class AddGameActivity : AppCompatActivity() {
 
@@ -23,7 +25,7 @@ class AddGameActivity : AppCompatActivity() {
 
         buttonAdd.setOnClickListener {
 
-            game = Game(editTextName.text.toString(), editTextGender.text.toString())
+            game = Game(editTextName.text.toString(), editTextGender.text.toString(), UtilFunctions().currentDate())
             Toast.makeText(this, "Jogo adicionado com sucesso!", Toast.LENGTH_SHORT).show()
 
             val intent = Intent()
