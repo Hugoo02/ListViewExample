@@ -8,5 +8,11 @@
         android:title="Adicionar"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/itemFirts"
+        android:icon="@drawable/ic_baseline_arrow_circle_up_24"
+        android:title="Primeira do dia"
+        app:showAsAction="ifRoom" />
+
 
 </menu>

@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity() {
 
                 return true
             }
+
+            R.id.itemFirts -> {
+
+
+
+                return true
+            }
         }
 
         return false

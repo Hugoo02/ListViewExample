@@ -15,4 +15,18 @@ class UtilFunctions {
 
     }
 
+    fun stringtoDate(date: String) : Calendar{
+
+        val replaceDate = date.replace("T00:00:00.000Z", "")
+
+        val calendar = Calendar.getInstance()
+
+        calendar.time = SimpleDateFormat("yyyy-MM-dd").parse(replaceDate)
+
+        return calendar
+
+        //Calendar.DAY_OF_WEEK == day
+
+    }
+
 }
